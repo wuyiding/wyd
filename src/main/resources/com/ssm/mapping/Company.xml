@@ -4,7 +4,7 @@
 
 <mapper namespace="com.ssm.mapper.CompanyMapper">
     <select id="selectCompanyByUsername" parameterType="String" resultType="com.ssm.model.Company">
-        SELECT * FROM `wuyiding` WHERE username = #{username}
+        select * from wuyiding where username = #{username}
     </select>
     <!-- 为了返回list 类型而定义的returnMap -->
     <resultMap type="com.ssm.model.Company" id="resultListCompany">
@@ -23,4 +23,25 @@
     <select id="selectCompanies" resultMap="resultListCompany">
         select * from wuyiding
     </select>
+
+    <insert id="addCompany" parameterType="com.ssm.model.Company" >
+        insert into wuyiding (username, companyname, starttime, payment, telephone, workernumber, income, vip, password, price)
+        values (#{username}, #{companyname}, #{starttime}, #{payment}, #{telephone}, #{workernumber}, #{income}, #{vip}, #{password}, #{price})
+    </insert>
+    <update id="updateCompany" parameterType="com.ssm.model.Company">
+         update wuyiding set companyname = #{companyname},
+         starttime = #{starttime},
+         payment = #{payment},
+         telephone = #{telephone},
+         workernumber = #{workernumber},
+         income = #{income},
+         vip = #{vip},
+         password = #{password},
+         price = #{price}
+         where username = #{username}
+    </update>
+    <delete id="deleteCompany" parameterType="String">
+        delete from wuyiding where username = #{username}
+    </delete>
+
 </mapper>
